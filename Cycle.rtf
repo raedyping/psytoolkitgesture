@@ -1,125 +1,114 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-\margl1440\margr1440\vieww24540\viewh15200\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0\fs36 \cf0 \
-## MAIN experimental script\
-\
-#first participants watched a video from youtube (created by me! redacted here)\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 l: cycle1\
-t: youtube\
-q: <b>1. Sentences</b> Watch the video exactly <b>two times!</b>\
-- \{video link redacted\}\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
-##then they answered a questionnaire like this one as a distractor task\
-scale: hand\
-- \{score=-1\} left\
-- \{score=0\} no preference\
-- \{score=1\} right\
-\
-l: handedness\
-t: scale hand\
-q: <b>2. Questionnaire</b> Please indicate which hand you would use for each of the following.\
-- writing\
-- drawing\
-- throwing\
-#and so on\'97I didn\'92t write this questionnaire, it is the Edinburgh Handedness Inventory. So I won\'92t copy it here. \
-\
-#then pictures showed and participants pressed y if the picture had been named in the video they watched and n if not\
-l: CYCLE3DV\
-t: experiment\
-q: <b>3. Pictures</b> Click the button at the bottom of the screen.\
-- CYCLE_3\
-\
-\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 # CYCLE 3: Here is an example of a cycle from the experiment\
-\
-# specifying names for each image i\'92ll use in this cycle\
-bitmaps\
-  box box.png\
-  bus bus.png\
-  cookie cookie.png\
-  knife knife.png\
-  paper paper.png\
-  pig pig.png\
-  sandwich sandwich.png\
-  shoe shoe.png\
-  strawberry strawberry.png\
-  ok1 pressy.jpg\
-  ok2 threesec.jpg\
-  ok3 twosec.jpg\
-  ok4 onesec.jpg\
-  ok5 herewego.jpg\
-  lh lefthandtest.jpg\
-  rh righthandtest.jpg\
-\
-#assigning important information to be associated with each picture in the cycle\
-##1 bitmap name, 2 correct response (1=y), 3 trial type, 4 block (0 for practice), 5 object name, 6 unique id\
-table pictures\
-  box 1 "incongruent" 1 "box" 1\
-  bus 2 "filler" 1 "bus" 3\
-  cookie 2 "filler" 1 "cookie" 6\
-  knife 1 "congruent" 1 "knife" 2\
-  paper 1 "congruent" 1 "paper" 5\
-  pig 2 "filler" 1 "pig" 9\
-  sandwich 1 "congruent" 1 "sandwich" 7\
-  shoe 1 "incongruent" 1 "shoe" 8\
-  strawberry 1 "incongruent" 1 "strawberry" 4\
-\
-# instructs participants to put their fingers on the y and n keys, always plays right before pictures\
-task putfingers\
-  keys y n\
-  show bitmap rh\
-  readkey 1 27000\
-  show bitmap lh\
-  readkey 2 27000\
-\
-# counts down before pictures play\
-task okgo\
-  keys y\
-  show bitmap ok1\
-  readkey 1 27000\
-  show bitmap ok2\
-  delay 1000\
-  show bitmap ok3\
-  delay 1000\
-  show bitmap ok4\
-  delay 1000\
-  show bitmap ok5\
-  delay 1000\
-\
-# displays each of the bitmaps in the table, captures participant response and reaction time, along with item information to be used in data analysis\
-task picresponse\
-  keys y n\
-  table pictures\
-  show bitmap @1\
-  readkey @2 5000\
-  save @4 @6 @3 @5 STATUS RT\
-\
-# runs the three blocks of trials\
-block one\
-  tasklist\
-    putfingers 1\
-  end\
-\
-block two\
-  tasklist\
-    okgo 1\
-  end\
-\
-block three\
-  tasklist\
-    picresponse 9 all_before_repeat\
-  end\
-\
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
-\cf0 \
-\
-\
-}
+## MAIN experimental script
+
+#first participants watched a video from youtube (created by me! redacted here)
+l: cycle1
+t: youtube
+q: <b>1. Sentences</b> Watch the video exactly <b>two times!</b>
+- {video link redacted}
+
+##then they answered a questionnaire like this one as a distractor task
+scale: hand
+- {score=-1} left
+- {score=0} no preference
+- {score=1} right
+
+l: handedness
+t: scale hand
+q: <b>2. Questionnaire</b> Please indicate which hand you would use for each of the following.
+- writing
+- drawing
+- throwing
+#and so on—I didn’t write this questionnaire, it is the Edinburgh Handedness Inventory. So I won’t copy it here. 
+
+#then pictures showed and participants pressed y if the picture had been named in the video they watched and n if not
+l: CYCLE3DV
+t: experiment
+q: <b>3. Pictures</b> Click the button at the bottom of the screen.
+- CYCLE_3
+
+
+
+# CYCLE 3: Here is an example of a cycle from the experiment
+
+# specifying names for each image i’ll use in this cycle
+bitmaps
+  box box.png
+  bus bus.png
+  cookie cookie.png
+  knife knife.png
+  paper paper.png
+  pig pig.png
+  sandwich sandwich.png
+  shoe shoe.png
+  strawberry strawberry.png
+  ok1 pressy.jpg
+  ok2 threesec.jpg
+  ok3 twosec.jpg
+  ok4 onesec.jpg
+  ok5 herewego.jpg
+  lh lefthandtest.jpg
+  rh righthandtest.jpg
+
+#assigning important information to be associated with each picture in the cycle
+##1 bitmap name, 2 correct response (1=y), 3 trial type, 4 block (0 for practice), 5 object name, 6 unique id
+table pictures
+  box 1 "incongruent" 1 "box" 1
+  bus 2 "filler" 1 "bus" 3
+  cookie 2 "filler" 1 "cookie" 6
+  knife 1 "congruent" 1 "knife" 2
+  paper 1 "congruent" 1 "paper" 5
+  pig 2 "filler" 1 "pig" 9
+  sandwich 1 "congruent" 1 "sandwich" 7
+  shoe 1 "incongruent" 1 "shoe" 8
+  strawberry 1 "incongruent" 1 "strawberry" 4
+
+# instructs participants to put their fingers on the y and n keys, always plays right before pictures
+task putfingers
+  keys y n
+  show bitmap rh
+  readkey 1 27000
+  show bitmap lh
+  readkey 2 27000
+
+# counts down before pictures play
+task okgo
+  keys y
+  show bitmap ok1
+  readkey 1 27000
+  show bitmap ok2
+  delay 1000
+  show bitmap ok3
+  delay 1000
+  show bitmap ok4
+  delay 1000
+  show bitmap ok5
+  delay 1000
+
+# displays each of the bitmaps in the table, captures participant response and reaction time, along with item information to be used in data analysis
+task picresponse
+  keys y n
+  table pictures
+  show bitmap @1
+  readkey @2 5000
+  save @4 @6 @3 @5 STATUS RT
+
+# runs the three blocks of trials
+block one
+  tasklist
+    putfingers 1
+  end
+
+block two
+  tasklist
+    okgo 1
+  end
+
+block three
+  tasklist
+    picresponse 9 all_before_repeat
+  end
+
+
+
+
